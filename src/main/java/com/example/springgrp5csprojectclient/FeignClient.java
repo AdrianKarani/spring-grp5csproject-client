@@ -13,6 +13,7 @@ public interface FeignClient {
     // 1. Movies
 
     // Get All movies
+    // TODO: Factor in relationship and switch from string to structure of type Type class
     @RequestMapping(method = RequestMethod.GET, value = "movies/{categoryId}")
     List<Movie> findMovies(@RequestParam(name = "type") String type, @PathVariable(name = "categoryId") Long categoryId);
 

@@ -22,11 +22,12 @@ public class FeignRun implements CommandLineRunner {
         // 1. Movies
 
         // Get all movies
+        // TODO: Factor in relationship and switch from string to structure of type Type class
         List<Movie> getAllM = feignClient.findMovies("suggested",5L);
         System.out.println("Your movies: " + getAllM.toString());
 
         // Suggest a movie
-        Movie suggestM = feignClient.suggestMovie(new Movie("Transformers", "Sci-Fi"));
+        Movie suggestM = feignClient.suggestMovie(new Movie("Transformers", "12th December"));
         System.out.println("You've suggested: " + suggestM.toString());
 
         // Update movie details

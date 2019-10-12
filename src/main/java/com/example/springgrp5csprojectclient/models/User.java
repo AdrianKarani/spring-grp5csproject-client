@@ -1,6 +1,7 @@
 package com.example.springgrp5csprojectclient.models;
 
 public class User {
+    // TODO: Relationship to Movie
 
     private Long id;
     private String name;
