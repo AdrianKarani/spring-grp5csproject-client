@@ -1,21 +1,30 @@
 package com.example.springgrp5csprojectclient.models;
 
 public class Movie {
-    // TODO: Relationship to Type and Category
 
     private Long id;
     private String name;
-    private String releaseDate;
-//    private String type;
+    private Type type;
 
     // Empty Constructor
     public Movie(){
-
     }
 
-    public Movie(String name, String releaseDate) {
+    public Movie(String name) {
         this.name = name;
-        this.releaseDate = releaseDate;
+    }
+
+    public Movie(String name, Type type) {
+        this.name = name;
+        this.type = type;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public Long getId() {
@@ -34,28 +43,11 @@ public class Movie {
         this.name = name;
     }
 
-    public String getCategory() {
-        return releaseDate;
-    }
-
-    public void setCategory(String category) {
-        this.releaseDate = category;
-    }
-
-//    public String getType() {
-//        return type;
-//    }
-//
-//    public void setType(String type) {
-//        this.type = type;
-//    }
-
     @Override
     public String toString() {
         return "Movie{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", category='" + releaseDate + '\'' +
                 '}';
     }
 }

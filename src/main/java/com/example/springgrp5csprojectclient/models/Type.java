@@ -8,8 +8,7 @@ public class Type {
     public Type() {
     }
 
-    public Type(Long id, String typeName) {
-        this.id = id;
+    public Type(String typeName) {
         this.typeName = typeName;
     }
 
