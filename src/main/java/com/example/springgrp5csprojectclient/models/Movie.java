@@ -4,7 +4,7 @@ public class Movie {
 
     private Long id;
     private String name;
-    private Type type;
+    private String releaseDate;
 
     // Empty Constructor
     public Movie(){
@@ -14,18 +14,12 @@ public class Movie {
         this.name = name;
     }
 
-    public Movie(String name, Type type) {
+
+    public Movie(String name, String releaseDate) {
         this.name = name;
-        this.type = type;
+        this.releaseDate = releaseDate;
     }
 
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
 
     public Long getId() {
         return id;
@@ -43,11 +37,20 @@ public class Movie {
         this.name = name;
     }
 
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", releaseDate='" + releaseDate + '\'' +
                 '}';
     }
 }

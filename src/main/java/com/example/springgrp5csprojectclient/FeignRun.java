@@ -2,11 +2,13 @@ package com.example.springgrp5csprojectclient;
 
 import com.example.springgrp5csprojectclient.models.Category;
 import com.example.springgrp5csprojectclient.models.Movie;
-import com.example.springgrp5csprojectclient.models.Type;
 import com.example.springgrp5csprojectclient.models.User;
+import org.graalvm.compiler.lir.LIRInstruction;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import sun.nio.cs.US_ASCII;
 
+import java.net.UnknownServiceException;
 import java.util.List;
 
 @Component
@@ -23,20 +25,43 @@ public class FeignRun implements CommandLineRunner {
 
         // 1. Movies
 
+        // GET
+
         // List all movies
-        List<Movie> findAllM = feignClient.findAllMovies();
-        System.out.println("All Movies: " + findAllM.toString());
+        List<Movie> allMovies = feignClient.getAllMovies();
+        System.out.println("All Movies: " + allMovies.toString());
 
-        // Pick one movie
-        Movie pickOneM = feignClient.findOneMovie(23L);
-        System.out.println("Movie Found: " + pickOneM.toString());
+        // Get All movies in a particular category and owned by the user(Type = suggested)
+        List<Movie> ownedMovies = feignClient.findMovies("suggested",5L);
+        System.out.println("Your movies: " + ownedMovies.toString());
 
-        // Get All movies in a particular category and owned by the user
-        List<Movie> getAllM = feignClient.findMovies(new Type("suggested"),5L);
-        System.out.println("Your movies: " + getAllM.toString());
+        // Get the Release Date of the Movie with the movie's name
+        Movie releaseDate = feignClient.getReleaseDate("Transformers");
+        System.out.println("Release Date: " + releaseDate.toString());
+
+        // Get all Movies that have been Suggested
+        List<Movie> suggestedMovies = feignClient.getSuggestedMovies();
+        System.out.println("Suggested Movies: " + suggestedMovies.toString());
+
+        // Get all liked movies
+        List<Movie> likedMovies = feignClient.getLikedMovies();
+        System.out.println("Liked Movies: " + likedMovies.toString());
+
+        // Get all users who suggested a movie
+        List<User> suggestion = feignClient.usersWhoSuggested(5L);
+        System.out.println("Users who suggested the movie given: " + suggestion.toString());
+
+        // Get all users who liked a movie
+        List<User> likes = feignClient.getLikes(5L);
+        System.out.println("Users who liked the movie given: " + likes.toString());
+
+        // List a user's Favourite Movies
+        List<Movie> favorites = feignClient.getFavorites(5L);
+        System.out.println("Your favorites: " + favorites.toString());
+
 
         // Suggest a movie
-        Movie suggestM = feignClient.suggestMovie(new Movie("Transformers"));
+        Movie suggestM = feignClient.postMovie(1L, new Movie("Transformers", "2014"));
         System.out.println("You've suggested: " + suggestM.toString());
 
         // Update movie details
@@ -61,8 +86,6 @@ public class FeignRun implements CommandLineRunner {
 
         // 3. Categories
 
-        // Find all categories
-        Category findAllC = feignClient.findAllCategories(2L);
-        System.out.println("The categories are: " + findAllC.toString());
+
     }
 }
