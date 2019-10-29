@@ -88,7 +88,7 @@ public class FeignRun implements CommandLineRunner {
         // 2. Users
 
         // GET
-//
+
 //DONE->// Find all users
         List<User> getAllUsers = feignClient.getAllUsers();
         System.out.println("Users " + getAllUsers.toString());
@@ -114,14 +114,14 @@ public class FeignRun implements CommandLineRunner {
         System.out.println("Movie added to favorites: " + addFavoriteMovie.toString());
 
         // PATCH
-//
+
 //ERROR>// Update User
         // TODO: Invalid Method PATCH
         User updateU = feignClient.updateUser(21L, new User("Jane Doe Mama yao"));
         System.out.println("Updated user details: " + updateU.toString());
-//
+
         // DELETE
-//
+
         // Delete user
         User deleteU = feignClient.deleteUser(22l,1234l);
         System.out.println("Account deleted: " + deleteU.toString());
@@ -140,7 +140,7 @@ public class FeignRun implements CommandLineRunner {
         System.out.println("Single category: " + getOneCategory.toString());
 
         // POST
-//
+
 //ERROR>// Create a Category
         // TODO: Error 404
         Category createC = feignClient.createCategory(10l, new Category( "Nonsense"));
