@@ -14,6 +14,11 @@ public class User {
         this.name = name;
     }
 
+    // For the sake of updating name
+    public User(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

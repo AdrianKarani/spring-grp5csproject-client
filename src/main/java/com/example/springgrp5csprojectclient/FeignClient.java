@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@org.springframework.cloud.openfeign.FeignClient(name = "client", url = "http://10.52.2.238:5555")
+@org.springframework.cloud.openfeign.FeignClient(name = "client", url = "http://10.51.15.93:5555")
 public interface FeignClient {
 
     // 1. MOVIES
@@ -28,7 +28,7 @@ public interface FeignClient {
 
     // Get the Release Date of the Movie with the movie's Id
     @RequestMapping(method = RequestMethod.GET, value = "movies/{movieId}/release_date")
-    Movie getReleaseDate(@PathVariable(name = "movieId") Long movieId);
+    String getReleaseDate(@PathVariable(name = "movieId") Long movieId);
 
     // Get all Movies that have been Suggested
     @RequestMapping(method = RequestMethod.GET, value = "movies/suggested")
@@ -43,8 +43,8 @@ public interface FeignClient {
     List<User> usersWhoSuggested(@PathVariable(name = "movieId") Long movieId);
 
     // Get all users who liked a movie
-    @RequestMapping(method = RequestMethod.GET, value = "movies/liked/{movieId}/users")
-    List<User> getLikes(@PathVariable(name = "movieId") Long movieId);
+    @RequestMapping(method = RequestMethod.GET, value = "movies/liked/{id}/users")
+    List<User> getLikes(@PathVariable(name = "id") Long movieId);
 
     // POST
 
@@ -53,14 +53,14 @@ public interface FeignClient {
     Movie postMovie(@PathVariable(name = "id") Long id, @RequestBody Movie movie);
 
     // Approve Suggested Movie
-    @RequestMapping(method = RequestMethod.POST, value = "users/{idNumber}/movies/suggested/{movieId}")
-    Movie approveSuggestedMovie(@PathVariable(name = "idNumber") Long idNumber, @PathVariable(name = "movieId") Long movieId);
+    @RequestMapping(method = RequestMethod.POST, value = "users/{id}/movies/suggested/{movieId}")
+    Movie approveSuggestedMovie(@PathVariable(name = "id") Long id, @PathVariable(name = "movieId") Long movieId);
 
     // PATCH
 
     // Update Original / Suggested Movie
-    @RequestMapping(method = RequestMethod.PATCH, value = "users/{idNumber}/{movieId}")
-    Movie updateMovie(@PathVariable(name = "idNumber") Long idNumber, @PathVariable(name = "movieId") Long movieId, @RequestBody Movie movie);
+    @RequestMapping(method = RequestMethod.PATCH, value = "users/{id}/{movieId}")
+    Movie updateMovie(@PathVariable(name = "id") Long id, @PathVariable(name = "movieId") Long movieId, @RequestBody Movie movie);
 
     // DELETE
 
@@ -98,13 +98,13 @@ public interface FeignClient {
 
     // User adds a movie to Favourites list
     @RequestMapping(method = RequestMethod.POST, value = "users/{id}/movies/like")
-    Movie addFavorite(@PathVariable(name = "id") Long idNumber, @RequestParam(name = "movieId") Long movieId);
+    Movie addFavorite(@PathVariable(name = "id") Long id, @RequestParam(name = "movieId") Long movieId);
 
     // PATCH
 
     // Update User
-    @RequestMapping(method = RequestMethod.PATCH, value = "users/{idNumber}")
-    User updateUser(@RequestParam(name = "idNumber") Long idNumber, @RequestBody User user);
+    @RequestMapping(method = RequestMethod.PATCH, value = "users/{id}")
+    User updateUser(@PathVariable(name = "id") Long id, @RequestBody User user);
 
     // DELETE
 
