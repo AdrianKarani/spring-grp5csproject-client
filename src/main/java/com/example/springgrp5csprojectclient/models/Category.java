@@ -3,14 +3,14 @@ package com.example.springgrp5csprojectclient.models;
 public class Category {
 
     private Long id;
-    private String categoryName;
+    private String name;
 
     public Category() {
     }
 
-    public Category(Long id, String categoryName) {
+    public Category(Long id, String name) {
         this.id = id;
-        this.categoryName = categoryName;
+        this.name = name;
     }
 
     public Long getId() {
@@ -21,19 +21,19 @@ public class Category {
         this.id = id;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getName() {
+        return name;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
-                ", categoryName='" + categoryName + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

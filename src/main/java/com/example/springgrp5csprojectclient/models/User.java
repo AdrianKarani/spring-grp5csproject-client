@@ -2,23 +2,16 @@ package com.example.springgrp5csprojectclient.models;
 
 public class User {
 
-    private Long id;
     private String name;
+    private Long idNumber;
+    private Long id;
 
     public User() {
     }
 
-    public User(Long id, String name) {
-        this.id = id;
+    public User(String name, Long idNumber) {
+        this.idNumber = idNumber;
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -29,11 +22,29 @@ public class User {
         this.name = name;
     }
 
+    public Long getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(Long idNumber) {
+        this.idNumber = idNumber;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
+                ", idNumber=" + idNumber +
+                ", id=" + id +
                 '}';
     }
 }

@@ -7,7 +7,7 @@ public class Movie {
     private String releaseDate;
 
     // Empty Constructor
-    public Movie(){
+    public Movie() {
     }
 
     public Movie(String name) {
