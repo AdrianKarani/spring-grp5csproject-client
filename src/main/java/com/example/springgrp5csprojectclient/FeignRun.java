@@ -70,8 +70,7 @@ public class FeignRun implements CommandLineRunner {
 //            Movie suggestM = feignClient.postMovie(41L, new Movie("Baby Driver", "2018"));
 //            System.out.println("You've suggested: " + suggestM.toString());
 //
-//    //------// Approve Suggested Movie - Admin only
-//            // TODO: Fix deletion from pending suggested
+//    //DONE->// Approve Suggested Movie - Admin only
 //            Movie approveM = feignClient.approveSuggestedMovie(10l, 44l);
 //            System.out.println("Movie approved " + approveM.toString());
 
@@ -171,7 +170,7 @@ public class FeignRun implements CommandLineRunner {
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 }
