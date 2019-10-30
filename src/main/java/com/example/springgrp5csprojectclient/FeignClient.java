@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@org.springframework.cloud.openfeign.FeignClient(name = "client", url = "http://10.51.15.93:5555")
+@org.springframework.cloud.openfeign.FeignClient(name = "client", url = "http://10.55.42.10:5555")
 public interface FeignClient {
 
     // 1. MOVIES
@@ -30,9 +30,13 @@ public interface FeignClient {
     @RequestMapping(method = RequestMethod.GET, value = "movies/{movieId}/release_date")
     String getReleaseDate(@PathVariable(name = "movieId") Long movieId);
 
-    // Get all Movies that have been Suggested
-    @RequestMapping(method = RequestMethod.GET, value = "movies/suggested")
-    List<Movie> getSuggestedMovies();
+    // Get all Movies that have been pending suggested
+    @RequestMapping(method = RequestMethod.GET, value = "movies/suggested/pending")
+    List<Movie> getPendingSuggestedMovies();
+
+    // Get all Movies that have been approved suggested
+    @RequestMapping(method = RequestMethod.GET, value = "movies/suggested/approved")
+    List<Movie> getApprovedSuggestedMovies();
 
     // Get all liked movies
     @RequestMapping(method = RequestMethod.GET, value = "movies/liked")
@@ -56,17 +60,17 @@ public interface FeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "users/{id}/movies/suggested/{movieId}")
     Movie approveSuggestedMovie(@PathVariable(name = "id") Long id, @PathVariable(name = "movieId") Long movieId);
 
-    // PATCH
+    // PUT
 
     // Update Original / Suggested Movie
-    @RequestMapping(method = RequestMethod.PATCH, value = "users/{id}/{movieId}")
+    @RequestMapping(method = RequestMethod.PUT, value = "users/{id}/movies/{movieId}")
     Movie updateMovie(@PathVariable(name = "id") Long id, @PathVariable(name = "movieId") Long movieId, @RequestBody Movie movie);
 
     // DELETE
 
     // Deleting a movie
-    @RequestMapping(method = RequestMethod.DELETE, value = "users/{userId}/movies/{movieId}")
-    Movie deleteMovie(@PathVariable(name = "idNumber") Long idNumber, @PathVariable(name = "movieId") Long movieId);
+    @RequestMapping(method = RequestMethod.DELETE, value = "users/{id}/movies/{movieId}")
+    Movie deleteMovie(@PathVariable(name = "id") Long id, @PathVariable(name = "movieId") Long movieId);
 
 
     // 2. USERS
@@ -100,16 +104,16 @@ public interface FeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "users/{id}/movies/like")
     Movie addFavorite(@PathVariable(name = "id") Long id, @RequestParam(name = "movieId") Long movieId);
 
-    // PATCH
+    // PUT
 
     // Update User
-    @RequestMapping(method = RequestMethod.PATCH, value = "users/{id}")
+    @RequestMapping(method = RequestMethod.PUT, value = "users/{id}")
     User updateUser(@PathVariable(name = "id") Long id, @RequestBody User user);
 
     // DELETE
 
     // Delete the account
-    @RequestMapping(method = RequestMethod.DELETE, value = "users/{id}/idnumber/{idNumber}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "users/{id}/idNumber/{idNumber}")
     User deleteUser(@PathVariable(name = "id") Long id, @PathVariable(name = "idNumber") Long idNumber);
 
 
@@ -128,13 +132,13 @@ public interface FeignClient {
     // POST
 
     // Create a Category
-    @RequestMapping(method = RequestMethod.POST, value = "users/{id}/categories")
+    @RequestMapping(method = RequestMethod.POST, value = "users/{id}/category")
     Category createCategory(@PathVariable(name = "id") Long id, @RequestBody Category category);
 
-    // PATCH
+    // PUT
 
     // Update a Category
-    @RequestMapping(method = RequestMethod.PATCH, value = "users/{id}/category/{categoryId}")
+    @RequestMapping(method = RequestMethod.PUT, value = "users/{id}/category/{categoryId}")
     Category updateCategory(@PathVariable(name = "id") Long id, @PathVariable(name = "categoryId") Long categoryId, @RequestBody Category category);
 
     // DELETE
