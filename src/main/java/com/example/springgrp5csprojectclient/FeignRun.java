@@ -73,10 +73,13 @@ public class FeignRun implements CommandLineRunner {
 
         // PATCH
 
-//ERROR>// Update movie details
-        // TODO: Error 404
-        Movie updateM = feignClient.updateMovie(21L, 33L, new Movie("IT FOREVER", "2099"));
-        System.out.println("Update successful: " + updateM.toString());
+//DONE>// Update movie details
+        Movie transformers = feignClient.findMovie(4L);
+//        System.out.println("Updating Movie: " + transformers.toString());
+//        transformers.setReleaseDate("2007");
+//        System.out.println("To: " + transformers.toString());
+//        Movie updateM = feignClient.updateMovie(10L, transformers.getId(), transformers);
+//        System.out.println("Update successful: " + updateM.toString());
 
         // DELETE
 
@@ -105,20 +108,21 @@ public class FeignRun implements CommandLineRunner {
         // POST
 
 //DONE->// Create account: Register
-        User createU = feignClient.createUser(new User("Jane Doe", 1234L));
-        System.out.println("Account created: " + createU.toString());
+//        User createU = feignClient.createUser(new User("Jacob Doe", 12234L));
+//        System.out.println("Account created: " + createU.toString());
 
-//ERROR>// User adds a movie to Favourites list
-        // TODO: Error 404
-        Movie addFavoriteMovie = feignClient.addFavorite(21l, 36l);
-        System.out.println("Movie added to favorites: " + addFavoriteMovie.toString());
+//DONE>// User adds a movie to Favourites list
+//        Movie transformers = feignClient.findMovie(34L);
+//        Movie addFavoriteMovie = feignClient.addFavorite(12L, transformers.getId());
+//        System.out.println("Movie added to favorites: " + addFavoriteMovie.toString());
 
         // PATCH
 
-//ERROR>// Update User
-        // TODO: Invalid Method PATCH
-        User updateU = feignClient.updateUser(21L, new User("Jane Doe Mama yao"));
-        System.out.println("Updated user details: " + updateU.toString());
+//DONE>// Update User
+//        User updateUser = feignClient.getOneUser(21L);
+//        updateUser.setName("Jane Doe Mama Yao");
+//        User updateU = feignClient.updateUser(updateUser.getId(), updateUser);
+//        System.out.println("Updated user details: " + updateU.toString());
 
         // DELETE
 
@@ -132,25 +136,24 @@ public class FeignRun implements CommandLineRunner {
         // GET
 
 //DONE->// List all categories
-        List<Category> getAllCategories = feignClient.getAllCategories();
-        System.out.println("Categories: " + getAllCategories.toString());
+//        List<Category> getAllCategories = feignClient.getAllCategories();
+//        System.out.println("Categories: " + getAllCategories.toString());
 
 //DONE->// Pick one category
-        Category getOneCategory = feignClient.getOneCategory(1l);
-        System.out.println("Single category: " + getOneCategory.toString());
+//        Category getOneCategory = feignClient.getOneCategory(1l);
+//        System.out.println("Single category: " + getOneCategory.toString());
 
         // POST
 
-//ERROR>// Create a Category
-        // TODO: Error 404
-        Category createC = feignClient.createCategory(10l, new Category( "Nonsense"));
-        System.out.println("Created category: " + createC.toString());
+//DONE>// Create a Category
+//        Category createC = feignClient.createCategory(10l, new Category( "Nonsense"));
+//        System.out.println("Created category: " + createC.toString());
 
         // PATCH
 
         // Update a Category
-        Category updateC = feignClient.updateCategory(22l,2l, new Category(2l, "Thriller main"));
-        System.out.println("Updated: " + updateC);
+//        Category updateC = feignClient.updateCategory(22l,2l, new Category(2l, "Thriller main"));
+//        System.out.println("Updated: " + updateC);
 
         // DELETE
 
