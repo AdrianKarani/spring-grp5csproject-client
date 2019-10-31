@@ -3,13 +3,13 @@ package com.example.springgrp5csprojectclient;
 import com.example.springgrp5csprojectclient.models.Category;
 import com.example.springgrp5csprojectclient.models.Movie;
 import com.example.springgrp5csprojectclient.models.User;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
-@FeignClient(name = "client", url = "http://127.0.0.1:5555")
-public interface NetflixFeignClient {
+@org.springframework.cloud.openfeign.FeignClient(name = "client", url = "http://10.51.15.93:5555")
+public interface FeignClient {
 
     // 1. MOVIES
 
@@ -20,8 +20,8 @@ public interface NetflixFeignClient {
     List<Movie> getAllMovies();
 
     // Find one movie
-    @RequestMapping(method = RequestMethod.GET, value = "movies/{id}")
-    Movie findMovie(@PathVariable(name = "id") Long id);
+    @RequestMapping(method = RequestMethod.GET, value = "movies/{movieId}")
+    Movie getOneMovie(@PathVariable(name = "movieId") Long movieId);
 
     // Get All movies in a particular category and owned by the user(Type = suggested)
     @RequestMapping(method = RequestMethod.GET, value = "movies/available/{categoryId}")
@@ -31,9 +31,13 @@ public interface NetflixFeignClient {
     @RequestMapping(method = RequestMethod.GET, value = "movies/{movieId}/release_date")
     String getReleaseDate(@PathVariable(name = "movieId") Long movieId);
 
-    // Get all Movies that have been Suggested
-    @RequestMapping(method = RequestMethod.GET, value = "movies/suggested")
-    List<Movie> getSuggestedMovies();
+    // Get all Movies that have been pending suggested
+    @RequestMapping(method = RequestMethod.GET, value = "movies/suggested/pending")
+    List<Movie> getPendingSuggestedMovies();
+
+    // Get all Movies that have been approved suggested
+    @RequestMapping(method = RequestMethod.GET, value = "movies/suggested/approved")
+    List<Movie> getApprovedSuggestedMovies();
 
     // Get all liked movies
     @RequestMapping(method = RequestMethod.GET, value = "movies/liked")
@@ -55,9 +59,9 @@ public interface NetflixFeignClient {
 
     // Approve Suggested Movie
     @RequestMapping(method = RequestMethod.POST, value = "users/{id}/movies/suggested/{movieId}")
-    Movie approveSuggestedMovie(@PathVariable(name = "id") Long id, @PathVariable(name = "movieId") Long movieId);
+    Movie approveSuggestedMovie(@PathVariable(name = "id") Long id, @PathVariable(name = "movieId") Long movieId, @RequestBody Set<Category> categories);
 
-    // PATCH
+    // PUT
 
     // Update Original / Suggested Movie
     @RequestMapping(method = RequestMethod.PUT, value = "users/{id}/movies/{movieId}")
@@ -66,8 +70,8 @@ public interface NetflixFeignClient {
     // DELETE
 
     // Deleting a movie
-    @RequestMapping(method = RequestMethod.DELETE, value = "users/{userId}/movies/{movieId}")
-    Movie deleteMovie(@PathVariable(name = "idNumber") Long idNumber, @PathVariable(name = "movieId") Long movieId);
+    @RequestMapping(method = RequestMethod.DELETE, value = "users/{id}/movies/{movieId}")
+    Movie deleteMovie(@PathVariable(name = "id") Long id, @PathVariable(name = "movieId") Long movieId);
 
 
     // 2. USERS
@@ -79,8 +83,8 @@ public interface NetflixFeignClient {
     List<User> getAllUsers();
 
     // View One User
-    @RequestMapping(method = RequestMethod.GET, value = "users/{id}")
-    User getOneUser(@PathVariable(name = "id") Long id);
+    @RequestMapping(method = RequestMethod.GET, value = "users/{idNumber}")
+    User getOneUser(@PathVariable(name = "idNumber") Long idNumber);
 
     // List all Movies that User has Suggested ****
     @RequestMapping(method = RequestMethod.GET, value = "users/{id}/movies/suggested")
@@ -101,7 +105,7 @@ public interface NetflixFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "users/{id}/movies/like")
     Movie addFavorite(@PathVariable(name = "id") Long id, @RequestParam(name = "movieId") Long movieId);
 
-    // PATCH
+    // PUT
 
     // Update User
     @RequestMapping(method = RequestMethod.PUT, value = "users/{id}")
@@ -110,7 +114,7 @@ public interface NetflixFeignClient {
     // DELETE
 
     // Delete the account
-    @RequestMapping(method = RequestMethod.DELETE, value = "users/{id}/idnumber/{idNumber}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "users/{id}/idNumber/{idNumber}")
     User deleteUser(@PathVariable(name = "id") Long id, @PathVariable(name = "idNumber") Long idNumber);
 
 
@@ -132,10 +136,10 @@ public interface NetflixFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "users/{id}/category")
     Category createCategory(@PathVariable(name = "id") Long id, @RequestBody Category category);
 
-    // PATCH
+    // PUT
 
     // Update a Category
-    @RequestMapping(method = RequestMethod.PATCH, value = "users/{id}/category/{categoryId}")
+    @RequestMapping(method = RequestMethod.PUT, value = "users/{id}/category/{categoryId}")
     Category updateCategory(@PathVariable(name = "id") Long id, @PathVariable(name = "categoryId") Long categoryId, @RequestBody Category category);
 
     // DELETE
