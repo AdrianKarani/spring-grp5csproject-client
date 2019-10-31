@@ -6,8 +6,9 @@ import com.example.springgrp5csprojectclient.models.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
-@org.springframework.cloud.openfeign.FeignClient(name = "client", url = "http://10.55.42.10:5555")
+@org.springframework.cloud.openfeign.FeignClient(name = "client", url = "http://10.51.15.93:5555")
 public interface FeignClient {
 
     // 1. MOVIES
@@ -58,7 +59,7 @@ public interface FeignClient {
 
     // Approve Suggested Movie
     @RequestMapping(method = RequestMethod.POST, value = "users/{id}/movies/suggested/{movieId}")
-    Movie approveSuggestedMovie(@PathVariable(name = "id") Long id, @PathVariable(name = "movieId") Long movieId);
+    Movie approveSuggestedMovie(@PathVariable(name = "id") Long id, @PathVariable(name = "movieId") Long movieId, @RequestBody Set<Category> categories);
 
     // PUT
 

@@ -1,10 +1,14 @@
 package com.example.springgrp5csprojectclient.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Movie {
 
     private Long id;
     private String name;
     private String releaseDate;
+    private Set<Category> categories;
 
     // Empty Constructor
     public Movie() {
@@ -45,12 +49,31 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
+    public void setCategory(Category category) {
+        if (this.categories == null) {
+            System.out.println("Adding a Category to empty set");
+            this.categories = new HashSet<Category>() {{ add(category); }};
+        } else {
+            System.out.println("Adding a Category to existing set");
+            this.categories.add(category);
+        }
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
+                ", categories='" + categories.stream().toString() + '\'' +
                 '}';
     }
 }

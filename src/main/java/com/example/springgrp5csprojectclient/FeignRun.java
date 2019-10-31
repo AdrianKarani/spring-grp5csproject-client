@@ -6,7 +6,9 @@ import com.example.springgrp5csprojectclient.models.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class FeignRun implements CommandLineRunner {
@@ -67,12 +69,21 @@ public class FeignRun implements CommandLineRunner {
             // POST
 
 //    //DONE->// Suggest a movie
-//            Movie suggestM = feignClient.postMovie(41L, new Movie("Baby Driver", "2018"));
+//            Category cate = feignClient.getOneCategory(71l);
+//            Movie newMovie = new Movie("Avengers", "2012");
+//            System.out.println("The Movie Details: " + newMovie.toString());
+//            Movie suggestM = feignClient.postMovie(41L, newMovie);
 //            System.out.println("You've suggested: " + suggestM.toString());
 //
 //    //DONE->// Approve Suggested Movie - Admin only
-//            Movie approveM = feignClient.approveSuggestedMovie(10l, 44l);
-//            System.out.println("Movie approved " + approveM.toString());
+            Category horror = feignClient.getOneCategory(1L);
+            Category drama = feignClient.getOneCategory(7L);
+            Category action = feignClient.getOneCategory(5L);
+            Category comedy = feignClient.getOneCategory(4L);
+            Set<Category> categories = new HashSet<Category>() {{ add(horror); add(drama); add(action); add(comedy); }};
+            System.out.println("Approving Movie.");
+            Movie approveM = feignClient.approveSuggestedMovie(10l, 66l, categories);
+            System.out.println("Movie approved " + approveM.toString());
 
 
             // PATCH
