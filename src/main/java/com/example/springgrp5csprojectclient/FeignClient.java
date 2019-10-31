@@ -65,7 +65,7 @@ public interface FeignClient {
 
     // Update Original / Suggested Movie
     @RequestMapping(method = RequestMethod.PUT, value = "users/{id}/movies/{movieId}")
-    Movie updateMovie(@PathVariable(name = "id") Long id, @PathVariable(name = "movieId") Long movieId, @RequestBody Movie movie);
+    Movie updateMovie(@PathVariable(name = "id") Long id, @PathVariable(name = "movieId") Long movieId, @RequestBody Movie movie, @RequestParam String category);
 
     // DELETE
 

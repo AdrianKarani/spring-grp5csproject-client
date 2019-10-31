@@ -69,31 +69,32 @@ public class FeignRun implements CommandLineRunner {
             // POST
 
 //    //DONE->// Suggest a movie
-//            Category cate = feignClient.getOneCategory(71l);
-//            Movie newMovie = new Movie("Avengers", "2012");
-//            System.out.println("The Movie Details: " + newMovie.toString());
-//            Movie suggestM = feignClient.postMovie(41L, newMovie);
+//            Movie capMarv = new Movie("Cars 2", "2018");
+//            System.out.println("The Movie Details: " + capMarv.toString());
+//            Movie suggestM = feignClient.postMovie(41L, capMarv);
 //            System.out.println("You've suggested: " + suggestM.toString());
 //
 //    //DONE->// Approve Suggested Movie - Admin only
-            Category horror = feignClient.getOneCategory(1L);
-            Category drama = feignClient.getOneCategory(7L);
-            Category action = feignClient.getOneCategory(5L);
-            Category comedy = feignClient.getOneCategory(4L);
-            Set<Category> categories = new HashSet<Category>() {{ add(horror); add(drama); add(action); add(comedy); }};
-            System.out.println("Approving Movie.");
-            Movie approveM = feignClient.approveSuggestedMovie(10l, 66l, categories);
-            System.out.println("Movie approved " + approveM.toString());
+//            Category horror = feignClient.getOneCategory(1L);
+//            Category drama = feignClient.getOneCategory(7L);
+//            Category action = feignClient.getOneCategory(5L);
+//            Category comedy = feignClient.getOneCategory(4L);
+//            Set<Category> categories = new HashSet<Category>() {{ add(horror); add(drama); add(action); add(comedy); }};
+//            System.out.println("Approving Movie.");
+//            Movie approveM = feignClient.approveSuggestedMovie(10l, 66l, categories);
+//            System.out.println("Movie approved " + approveM.toString());
 
 
             // PATCH
 
 //    //DONE->// Update movie details
-//            Movie findForUpdate = feignClient.getOneMovie(16l);
-//            findForUpdate.setName("Batman and Joker");
-//            findForUpdate.setReleaseDate("2099");
-//            Movie updateM = feignClient.updateMovie(10L, findForUpdate.getId(), findForUpdate);
-//            System.out.println("Update successful: " + updateM.toString());
+            Movie findForUpdate = feignClient.getOneMovie(49l);
+            findForUpdate.setName("Batman and Joker");
+            findForUpdate.setReleaseDate("2099");
+            Category h = feignClient.getOneCategory(1L);
+            Set<Category> categorySet = new HashSet<Category>() {{ add(h); }};
+            Movie updateM = feignClient.updateMovie(10L, findForUpdate.getId(), findForUpdate, "Horror");
+            System.out.println("Update successful: " + updateM.toString());
 
             // DELETE
 

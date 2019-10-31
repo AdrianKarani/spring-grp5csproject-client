@@ -73,7 +73,7 @@ public class Movie {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
-                ", categories='" + categories.stream().toString() + '\'' +
+                ", categories='" + categories + '\'' +
                 '}';
     }
 }
